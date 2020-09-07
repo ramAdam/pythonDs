@@ -1,6 +1,6 @@
 import unittest
 from linalg import Matrix
-from data import matrix, other, result, subtractResult, spareMatrix, scaledMatrix
+from data import matrix, other, result, subtractResult, spareMatrix, scaledMatrix, transMatrix
 from ds.array import Array
 from copy import copy
 import pdb
@@ -10,6 +10,9 @@ class TestMatrix(unittest.TestCase):
     def setUp(self):
         self.ncols = 2
         self.nrows = 3
+
+    def testPropertynCols(self):
+        assert matrix.nCols == 2
 
     def testClear(self):
         for row in spareMatrix:
@@ -27,7 +30,8 @@ class TestMatrix(unittest.TestCase):
         assert matrix == matrix
 
     def testSubtract(self):
-        "subtract matrices should return a new subtracted matrix"
+        """subtract matrices should return a 
+           new subtracted matrix"""
         result = matrix - other
         assert result == subtractResult
 
@@ -35,6 +39,9 @@ class TestMatrix(unittest.TestCase):
         assert matrix.colsRowsEqual(copy(matrix))
 
     def testEquals(self):
+        """for matrices to be equal, all values, number of rows
+           and columns should to be equal
+         """
         assert matrix == copy(matrix)
 
     def testAdd(self):
@@ -46,4 +53,7 @@ class TestMatrix(unittest.TestCase):
         assert matrix == scaledMatrix
 
     def testTranspose(self):
-        pass
+        tMatrix = matrix.transpose()
+        assert (tMatrix.numRows()) == (matrix.numCols())
+        assert (tMatrix.numCols()) == (matrix.numRows())
+        assert matrix.transpose() == transMatrix

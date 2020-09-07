@@ -6,8 +6,8 @@ class _MatrixIterator:
         assert isinstance(
             matrix, (Array2D)), "matrix is not instance of array2d"
         self._array2d = matrix
-        self.nrows = self._array2d.numRows()
-        self.ncols = self._array2d.numCols()
+        self.nrows = self._array2d.nRows
+        self.ncols = self._array2d.nCols
         self.i = 0
         self.j = 0
 
@@ -35,42 +35,45 @@ class Matrix(Array2D):
     def __add__(self, other):
         assert self.colsRowsEqual(
             other), "number of rows or cols are not equal"
-        result = Matrix(self.numRows(), self.numCols())
-        for i in range(self.numRows()):
-            for j in range(self.numCols()):
+        result = Matrix(self.nRows, self.nCols)
+        for i in range(self.nRows):
+            for j in range(self.nCols):
                 result[i, j] = self[i, j] + other[i, j]
         return result
 
     def __sub__(self, other):
         assert self.colsRowsEqual(
             other), "number of rows or cols are not equal"
-        result = Matrix(self.numRows(), self.numCols())
-        for i in range(self.numRows()):
-            for j in range(self.numCols()):
+        result = Matrix(self.nRows, self.nCols)
+        for i in range(self.nRows):
+            for j in range(self.nCols):
                 result[i, j] = self[i, j] - other[i, j]
         return result
 
     def __mul__(self, scalar):
-        for i in range(self.numRows()):
-            for j in range(self.numCols()):
+        for i in range(self.nRows):
+            for j in range(self.nCols):
                 self[i, j] = self[i, j] * scalar
 
     def __eq__(self, other):
         if not self.colsRowsEqual(other):
             return False
-        for i in range(self.numRows()):
-            for j in range(self.numCols()):
+        for i in range(self.nRows):
+            for j in range(self.nCols):
                 if not self[i, j] == other[i, j]:
                     return False
         return True
 
-    def scaleBy(self, scalar):
-        pass
-
     def transpose(self):
-        pass
+        """retuns a new matrix that is tranpose of this matrix"""
+        t = Matrix(self.nCols, self.nRows)
+        for i in range(t.nRows):
+            for j in range(self.nRows):
+                t[i, j] = self[j, i]
+
+        return t
 
     def colsRowsEqual(self, other):
         assert isinstance(
             other, (Matrix)), "other is not a instance of matrix"
-        return self.numRows() == other.numRows() and self.numCols() == other.numCols()
+        return self.nRows == other.nRows and self.nCols == other.nCols

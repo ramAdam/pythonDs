@@ -1,7 +1,7 @@
 from linalg import Matrix
 
 
-def populateMatrix(matrix, data):
+def populateMatrix(matrix: Matrix, data: list):
     for row in matrix:
         for i in range(len(row)):
             row[i] = data.pop()
@@ -38,3 +38,9 @@ scaledMatrix = Matrix(nrows, ncols)
 scaledData = [0, 2, 4, 6, 8, 10]
 scaledData.reverse()
 populateMatrix(scaledMatrix, scaledData)
+
+# transposed matrix result
+transMatrix = Matrix(2, 3)
+transData = [0, 2, 4, 1, 3, 5]
+transData.reverse()
+populateMatrix(transMatrix, transData)

@@ -1,5 +1,5 @@
 import unittest
-from data import matrix, result, other
+from data import matrix, result, other, transMatrix
 
 
 class TestPopulateMatrix(unittest.TestCase):
@@ -17,6 +17,14 @@ class TestPopulateMatrix(unittest.TestCase):
         testData = [6, 7, 8, 9, 1, 0]
         testData.reverse()
         self._assertPopulatedMatrix(other, testData)
+
+    def testTransposedPopulateMatrix(self):
+        transTestData = [0, 2, 4, 1, 3, 5]
+        transTestData.reverse()
+        assert transMatrix[0, 1] == 2
+        assert transMatrix[0, 2] == 4
+        assert transMatrix[1, 2] == 5
+        self._assertPopulatedMatrix(transMatrix, transTestData)
 
     def _assertPopulatedMatrix(self, matrix, data):
         for row in matrix:

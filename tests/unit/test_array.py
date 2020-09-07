@@ -64,3 +64,7 @@ class TestArray2d(unittest.TestCase):
 
         self.array2d.clear(0)
         assert self.array2d[rowIdx, colIdx] == 0
+
+    def test_propertNColsAndRows(self):
+        assert self.array2d.nCols == 5
+        assert self.array2d.nRows == 5

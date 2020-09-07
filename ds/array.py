@@ -21,7 +21,7 @@ class _ArrayIterator:
 
 class Array:
     def __init__(self, size):
-        """ Creates a one-dimensional array consisting of 
+        """ Creates a one-dimensional array consisting of
             size elements with each element initially
             set to None. size must be greater than zero"""
         self.size = size
@@ -51,38 +51,48 @@ class Array:
 class Array2D:
     def __init__(self, nrows, ncols):
 
-        self._nRows = Array(nrows)
+        self._rows = Array(nrows)
         for i in range(nrows):
-            self._nRows[i] = Array(ncols)
+            self._rows[i] = Array(ncols)
+        self._nRows = len(self._rows)
+        self._nCols = len(self._rows[0])
+
+    @property
+    def nRows(self):
+        return self._nRows
+
+     @property
+    def nCols(self):
+        return self._nCols
 
     def __getitem__(self, ndxTuple):
         assert len(ndxTuple) == 2, "invalid array subscript"
         rowIdx, colIdx = ndxTuple
         assert rowIdx >= 0 and rowIdx < self.numRows(), "row index, out of range"
         assert colIdx >= 0 and colIdx < self.numCols(), "col index, out of range"
-        return self._nRows[rowIdx][colIdx]
+        return self._rows[rowIdx][colIdx]
 
     def __setitem__(self, ndxTuple, value):
         assert len(ndxTuple) == 2, "invalid array subscript"
         rowIdx, colIdx = ndxTuple
         assert rowIdx >= 0 and rowIdx < self.numRows(), "row index, out of range"
         assert colIdx >= 0 and colIdx < self.numCols(), "col index, out of range"
-        self._nRows[rowIdx][colIdx] = value
+        self._rows[rowIdx][colIdx] = value
 
     def __iter__(self):
-        return _ArrayIterator(self._nRows)
+        return _ArrayIterator(self._rows)
 
     def numRows(self):
-        return len(self._nRows)
+        return len(self._rows)
 
     def numCols(self):
-        return len(self._nRows[0])
+        return len(self._rows[0])
 
     def clear(self, value):
         for i in range(self.numRows()):
-            assert self._nRows[i] is not None, "row on index {} is None".format(
+            assert self._rows[i] is not None, "row on index {} is None".format(
                 i)
-            self._nRows[i].clear(value)
+            self._rows[i].clear(value)
 
     def __repr__(self):
         l = []
