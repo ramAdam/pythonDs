@@ -1,5 +1,5 @@
 import unittest
-from ds.array import Array, Array2D
+from ds import Array, Array2D
 import pdb
 
 

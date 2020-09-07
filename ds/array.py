@@ -61,7 +61,7 @@ class Array2D:
     def nRows(self):
         return self._nRows
 
-     @property
+    @property
     def nCols(self):
         return self._nCols
 

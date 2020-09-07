@@ -26,6 +26,7 @@ class TestPopulateMatrix(unittest.TestCase):
         assert transMatrix[1, 2] == 5
         self._assertPopulatedMatrix(transMatrix, transTestData)
 
+    @unittest.skip("skipping utility method")
     def _assertPopulatedMatrix(self, matrix, data):
         for row in matrix:
             for i in range(len(row)):
