@@ -155,18 +155,12 @@ class LifeGrid(Array2D):
         count = 0
 
         for _ in range(length):
-            # pdb.set_trace()
             for _ in range(3):
-                if not (ix == row and jy == col):
-                    if ix >= 0 and jy >= 0 and ix < self.nRows and jy < self.nCols:
+                if ix >= 0 and jy >= 0 and ix < self.nRows and jy < self.nCols:
+                    if not (ix == row and jy == col):
                         if self[ix, jy] == 1:
                             count += 1
-                # print("({}, {})".format(ix, jy))
-
                 jy += 1
             ix += 1
             jy = reset
         return count
-
-    def checkValidIndex(self, index):
-        pass
