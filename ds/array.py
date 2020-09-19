@@ -24,6 +24,7 @@ class Array:
         """ Creates a one-dimensional array consisting of
             size elements with each element initially
             set to None. size must be greater than zero"""
+        assert size > 0, "size must be greater than zero"
         self.size = size
         ArrayType = ctypes.py_object * self.size
         self._elements = ArrayType()
@@ -52,6 +53,7 @@ class Array2D:
     def __init__(self, nrows, ncols):
 
         self._rows = Array(nrows)
+        assert ncols > 0, "number of cols must be greater than 0"
         for i in range(nrows):
             self._rows[i] = Array(ncols)
         self._nRows = len(self._rows)
@@ -97,6 +99,8 @@ class Array2D:
     def __repr__(self):
         l = []
         for i in range(self.numRows()):
+            l.append("[ ")
             for j in range(self.numCols()):
-                l.append(str(self[i, j]))
+                l.append(str(self[i, j]) + ' ')
+            l.append(']\n')
         return "".join(l)

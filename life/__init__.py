@@ -1,1 +1,1 @@
-from life.lifegrid import LifeGrid
+from life.lifegrid import LifeGrid, SorroundingCellIterator, RotateAroundIterator
