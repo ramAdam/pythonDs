@@ -155,12 +155,14 @@ class LifeGrid(Array2D):
         count = 0
 
         for _ in range(length):
-            for _ in range(3):
-                if ix >= 0 and jy >= 0 and ix < self.nRows and jy < self.nCols:
+            for _ in range(length):
+                try:
                     if not (ix == row and jy == col):
                         if self[ix, jy] == 1:
                             count += 1
-                jy += 1
+                    jy += 1
+                except AssertionError:
+                    jy += 1
             ix += 1
             jy = reset
         return count

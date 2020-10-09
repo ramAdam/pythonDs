@@ -1,4 +1,5 @@
 import ctypes
+from typing import Generic, TypeVar
 import pdb
 
 
@@ -19,7 +20,10 @@ class _ArrayIterator:
             raise StopIteration
 
 
-class Array:
+T = TypeVar('T')
+
+
+class Array(Generic[T]):
     def __init__(self, size):
         """ Creates a one-dimensional array consisting of
             size elements with each element initially
@@ -37,14 +41,23 @@ class Array:
         assert index >= 0 and index < self.size, "index out of range"
         return self._elements[index]
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index, value: T):
         assert index >= 0 and index < self.size, "index out of range"
         self._elements[index] = value
 
     def __iter__(self):
         return _ArrayIterator(self)
 
-    def clear(self, value):
+    def __repr__(self):
+        l = []
+        l.append('[')
+        for i in range(len(self)):
+            l.append(str(self[i]) + ", ")
+        l.append("]\n")
+
+        return "".join(l)
+
+    def clear(self, value: T):
         for i in range(len(self)):
             self._elements[i] = value
 

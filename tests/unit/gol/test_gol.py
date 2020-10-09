@@ -1,6 +1,7 @@
 import unittest
 
 from life import LifeGrid, SorroundingCellIterator, RotateAroundIterator
+from life import evolve
 from ds import Array2D
 from data import rotArray
 import pdb
@@ -134,10 +135,30 @@ class TestRotationIterator(unittest.TestCase):
 
 class TestGameOfLife(unittest.TestCase):
     def setUp(self):
-        pass
+        self.grid = LifeGrid(10, 10)
 
-    def testEvolve(self):
-        pass
+    def testEvolveAliveCellsLessThanOrEqualToOne(self):
+        """when number of live cells are less than or equal to one"""
+        initialConfig = [(0, 0), (1, 0)]
+        self.grid.configure(initialConfig)
+        evolve(self.grid)
+        for i, j in initialConfig:
+            assert self.grid[i, j] == 0
+
+        self.grid.clear(0)
+
+    def testEvolveAliveCellsGreaterThanEqualToFour(self):
+        """when number of live cells are greater than equal to four, the cell should be dead"""
+        initialConfig = [(1, 0), (0, 0), (0, 1), (1, 1), (2, 0)]
+        self.grid.configure(initialConfig)
+
+        evolve(self.grid)
+        assert self.grid[0, 0] == 1
+
+        assert self.grid[0, 0] == 1
+        assert self.grid[1, 0] == 0
+        assert self.grid[1, 1] == 1
+        assert self.grid[2, 0] == 0
 
     def testDraw(self):
         pass

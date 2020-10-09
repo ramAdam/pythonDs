@@ -44,6 +44,12 @@ class TestArray(unittest.TestCase):
 
         assert array[1] == 2
 
+    def testGeneric(self):
+        gArray = Array[str](5)
+        # pdb.set_trace()
+        gArray[3] = 0
+        assert gArray[3] == 0
+
 
 class TestArray2d(unittest.TestCase):
     def setUp(self):
